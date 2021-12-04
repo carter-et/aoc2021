@@ -1,0 +1,14 @@
+correct answer for this data is:
+2372923
+
+correct answer for this test is:
+230
+
+reconfirm this after refactoring code.
+
+Current, correct output:
+[1, 0, 1, 1, 0]
+oxy rating:  10111
+[0, 1, 0, 0, 1]
+co2 rating:  01010
+life support rating:  230
