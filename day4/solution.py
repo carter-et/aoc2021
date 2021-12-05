@@ -28,7 +28,6 @@ def part_two(bingo_calls, boards):
             if(hasWon):
                 print('winner with score of: ', score, call, score * call)
         
-#read data and return a tuple
 def intepret_data():
     # filename = 'test.txt'
     # filename = 'test2.txt'
