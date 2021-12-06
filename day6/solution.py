@@ -3,7 +3,9 @@ import time as time
 raw_data = [1,1,3,1,3,2,1,3,1,1,3,1,1,2,1,3,1,1,3,5,1,1,1,3,1,2,1,1,1,1,4,4,1,2,1,2,1,1,1,5,3,2,1,5,2,5,3,3,2,2,5,4,1,1,4,4,1,1,1,1,1,1,5,1,2,4,3,2,2,2,2,1,4,1,1,5,1,3,4,4,1,1,3,3,5,5,3,1,3,3,3,1,4,2,2,1,3,4,1,4,3,3,2,3,1,1,1,5,3,1,4,2,2,3,1,3,1,2,3,3,1,4,2,2,4,1,3,1,1,1,1,1,2,1,3,3,1,2,1,1,3,4,1,1,1,1,5,1,1,5,1,1,1,4,1,5,3,1,1,3,2,1,1,3,1,1,1,5,4,3,3,5,1,3,4,3,3,1,4,4,1,2,1,1,2,1,1,1,2,1,1,1,1,1,5,1,1,2,1,5,2,1,1,2,3,2,3,1,3,1,1,1,5,1,1,2,1,1,1,1,3,4,5,3,1,4,1,1,4,1,4,1,1,1,4,5,1,1,1,4,1,3,2,2,1,1,2,3,1,4,3,5,1,5,1,1,4,5,5,1,1,3,3,1,1,1,1,5,5,3,3,2,4,1,1,1,1,1,5,1,1,2,5,5,4,2,4,4,1,1,3,3,1,5,1,1,1,1,1,1]
 raw_test = [3,4,3,1,2]
 TESTING_MODE = False
-DAYS = 256
+DAYS = 80
+REPRODUCE_RATE = 6
+NEW_LIFE_REPRODUCE_RATE = 8
 
 class Fish:
     def __init__(self, ttl):
@@ -35,9 +37,9 @@ def part_one(data, days):
     print('Total fish: ', len(fish_list))
     return None
 
-def part_two(data, days):
+def part_two(data, days, reproduce_rate, new_life_reproduce_rate):
     # initialize rollig list
-    rolling_list = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+    rolling_list = [0] * (new_life_reproduce_rate + 1)
     for item in data:
         rolling_list[item] += 1
 
@@ -45,18 +47,10 @@ def part_two(data, days):
 
     # run each day
     for day in range(days):
-        tmp = rolling_list[0]
-        rolling_list[0] = rolling_list[1]
-        rolling_list[1] = rolling_list[2]
-        rolling_list[2] = rolling_list[3]
-        rolling_list[3] = rolling_list[4]
-        rolling_list[4] = rolling_list[5]
-        rolling_list[5] = rolling_list[6]
-        rolling_list[6] = rolling_list[7]
-        rolling_list[7] = rolling_list[8]
-        rolling_list[8] = 0
-        rolling_list[6] += tmp # old fish go back into circulation 
-        rolling_list[8] += tmp # for every old fish there is a new fish
+        tmp = rolling_list.pop(0)
+        rolling_list.append(tmp)
+        rolling_list[reproduce_rate] += tmp # old fish go back into circulation 
+        rolling_list[new_life_reproduce_rate] += tmp # for every old fish there is a new fish
 
         # print('Day: ', day + 1)
         # print('New fish: ', rolling_list[7])
@@ -76,7 +70,7 @@ if __name__ == "__main__":
 
     # part_one(raw, DAYS)
     
-    part_two(raw, DAYS)
+    part_two(raw, DAYS, REPRODUCE_RATE, NEW_LIFE_REPRODUCE_RATE)
 
     e_time = time.time()
 
