@@ -15,14 +15,9 @@ def part_one(bingo_calls, boards):
                 return None
 
 def part_two(bingo_calls, boards):
-    print('running part two...')
-    print(bingo_calls)
-    print('amount of boards: ', len(boards))
-
     hasWon = False
     score = 0
     for call in bingo_calls:
-        print('calling out number: ', call)
         for board in boards:
             (hasWon, score) = board.calculateBoard(call)
             if(hasWon):
@@ -62,7 +57,10 @@ def intepret_data():
     return (bingo_calls, boards)
 
 if __name__ == "__main__":
+    s_time = time.time()
     (bingo_calls, boards) = intepret_data()
-    part_one(bingo_calls, boards)
+    # part_one(bingo_calls, boards)
     part_two(bingo_calls, boards)
+    e_time = time.time()
+    print("Time: ", e_time - s_time)
     

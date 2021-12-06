@@ -45,5 +45,3 @@ class Board:
                 self.hasWon = True
                 return(True, self.total)
         return(False,0)
-
-    
