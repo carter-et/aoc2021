@@ -1,6 +1,5 @@
 def run():
-
-    file = open('G:/Personal/python-projects/advent-of-coding/ch1/test.txt', 'r')
+    file = open('./ch1/test.txt', 'r')
     Lines = file.readlines()
 
     prev_line = 0
@@ -14,3 +13,6 @@ def run():
         index = index + 1
     print(count)
     return count
+
+if __name__ == "__main__":
+    run()
